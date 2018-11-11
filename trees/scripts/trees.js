@@ -53,7 +53,7 @@ class tree {
   }
 
   fineFratelli(node) {
-    return node.rightSibling == null;
+    return node == null;
   }
 
   alberoVuoto() {
@@ -80,7 +80,7 @@ class tree {
       callbackFunction(node);
 
       let succFratello = this.succFratello(primoFiglio);
-      while (succFratello != null) {
+      while (!this.fineFratelli(succFratello)) {
         this.invisita(succFratello, callbackFunction);
         succFratello = this.succFratello(succFratello);
       }
@@ -92,7 +92,7 @@ class tree {
     if (!this.foglia(node)) {
         let child = this.primoFiglio(node);
 
-        while(child != null) {
+        while(!this.fineFratelli(child)) {
             this.previsita(child, callbackFunction);
             child = this.succFratello(child);
         }
@@ -102,7 +102,7 @@ class tree {
   postvisita(node, callbackFunction) {
     if (!this.foglia(node)) {
       let child = this.primoFiglio(node);
-      while (child != null) {
+      while (!this.fineFratelli(child)) {
         this.postvisita(child, callbackFunction);
         child = this.succFratello(child);
       }
