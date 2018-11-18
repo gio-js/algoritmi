@@ -11,6 +11,7 @@ $(document).ready(function() {
 
   let $table = null;
   let $container = $("[tree-searches]");
+  let $containerDraw = $("[tree-draw]");
   let index = 0;
 
   // table result log
@@ -35,4 +36,7 @@ $(document).ready(function() {
 
   // postvisita
   tableLog("postvisita");
+
+  // draw
+  t.draw($, $containerDraw, t.root);
 });

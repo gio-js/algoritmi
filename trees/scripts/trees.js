@@ -90,12 +90,12 @@ class tree {
   previsita(node, callbackFunction) {
     callbackFunction(node);
     if (!this.foglia(node)) {
-        let child = this.primoFiglio(node);
+      let child = this.primoFiglio(node);
 
-        while(!this.fineFratelli(child)) {
-            this.previsita(child, callbackFunction);
-            child = this.succFratello(child);
-        }
+      while (!this.fineFratelli(child)) {
+        this.previsita(child, callbackFunction);
+        child = this.succFratello(child);
+      }
     }
   }
 
@@ -110,6 +110,14 @@ class tree {
     callbackFunction(node);
   }
 
+  // todo
+  maxProf(node) {}
+
+  // todo
+  distanzaNodo(nodo) {
+    return -1;
+  }
+
   consoleOut(node) {
     if (node == null) return;
 
@@ -117,20 +125,33 @@ class tree {
     this.consoleOut(node.firstChild);
     this.consoleOut(node.rightSibling);
   }
-}
 
-window.sampleTree = (function() {
-  let t = new tree(30);
-  t.insNodo(15);
-  t.insNodo(8);
-  t.insNodo(25);
-  t.insNodo(35);
-  t.insNodo(32);
-  t.insNodo(40);
-  t.insNodo(23);
-  t.insNodo(28);
-  return t;
-})();
+  draw($, parentElement, node) {
+    let $table = $("<table />");
+    let $tr = $("<tr />");
+    let $rootTd = $("<td />").html(node.value);
+
+    $table.append($tr);
+    $tr.append($rootTd);
+
+    let sibling = node.rightSibling;
+    while (sibling != null) {
+      let $siblingElement = $("<td />").html(sibling.value);
+
+      $tr.append($siblingElement);
+      if (sibling.firstChild != null) {
+        this.draw($, $siblingElement, sibling.firstChild);
+      }
+
+      sibling = sibling.rightSibling;
+    }
+
+    $(parentElement).append($table);
+    if (node.firstChild != null) {
+      this.draw($, $rootTd, node.firstChild);
+    }
+  }
+}
 
 // previsita
 
