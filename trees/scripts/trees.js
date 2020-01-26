@@ -127,7 +127,7 @@ class tree {
   }
 
   draw($, parentElement, node) {
-    let $table = $("<table />");
+    let $table = $("<table class='table-tree' />");
     let $tr = $("<tr />");
     let $rootTd = $("<td />").html(node.value);
 
@@ -149,6 +149,20 @@ class tree {
     $(parentElement).append($table);
     if (node.firstChild != null) {
       this.draw($, $rootTd, node.firstChild);
+    }
+  }
+
+  sommaValoriPadriEdAggiungiFiglio(n, parentSum) {
+    if (!this.foglia(n)) {
+      let child = this.primoFiglio(n);
+
+      while (!this.fineFratelli(child)) {
+        this.sommaValoriPadriEdAggiungiFiglio(child, parentSum + n.value);
+        child = this.succFratello(child);
+      }
+    } else {
+      let newChild = new node(n, parentSum + n.value);
+      n.firstChild = newChild;
     }
   }
 }

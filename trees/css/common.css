@@ -2,3 +2,17 @@ table {
     float: left;
     margin-left: 15px;
 }
+
+.table-tree {
+    float: none;
+    margin: 0;
+    padding: 0;
+}
+
+.table-tree td {
+    padding: 10px;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: top;
+    width: 120px;
+}

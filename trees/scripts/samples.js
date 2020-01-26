@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  /// trees
   let t = new tree(30);
   t.insNodo(15);
   t.insNodo(8);
@@ -39,4 +40,31 @@ $(document).ready(function() {
 
   // draw
   t.draw($, $containerDraw, t.root);
+
+  // draw
+  t.sommaValoriPadriEdAggiungiFiglio(t.root, 0);
+  // draw
+  t.draw($, $containerDraw, t.root);
+
+  /*
+  -----
+  sort
+  */
+
+  let logOrder = (elements, call, perno) => {
+    let quickSortContainer = $("[list-order-quick-sort]");
+    let el = $("<div class='col-md-6' />");
+    el.html(
+      "call: " + call + "; elements : " + elements.join() + "; perno: " + perno
+    );
+    quickSortContainer.append(el);
+  };
+  let elements = [38, 81, 22, 48, 13, 69, 93, 14, 45, 58, 79, 72];
+
+
+  $("[run-quick-sort]").click(() => {
+    let sortInstance = new sort();
+    sortInstance.quickSort(elements, 0, elements.length - 1, logOrder, 0);
+  });
+  
 });
